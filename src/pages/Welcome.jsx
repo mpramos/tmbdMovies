@@ -1,10 +1,22 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Box, Button, Typography } from "@mui/material";
 import fondImage from '../assets/welcomefond.svg'
 import backgroundImage from '../assets/imgwelcome.svg'
 import WatchIcon from '../assets/icons/folder.svg'
+import { useAuth } from '../components/AuthContext';
 
 const Welcome = () => {
+  const { user, login , logout} = useAuth()
+  useEffect(() => {
+    if (user) {
+      console.log('sesion iniciada', user.email)
+      console.log('sesion iniciada', user.displayName)
+      console.log('sesion iniciada', user.photoURL)
+    }
+    else {
+      console.log('sesion cerrada')
+    }
+  },[user])
   return (
     <Box
       sx={{
@@ -85,6 +97,7 @@ const Welcome = () => {
                   Enjoy the newest movies
                 </Typography>
           <Button
+            onClick={login}
             variant="contained"
             color="primary"
             sx={{
